@@ -1,0 +1,69 @@
+class Fornecedor:
+    def __init__(self, fornecedor_id, nome, cnpj, telefone, email, endereco):
+        self.fornecedor_id = fornecedor_id
+        self.nome = nome
+        self.cnpj = cnpj
+        self.telefone = telefone
+        self.email = email
+        self.endereco = endereco
+    
+    def exibir_info(self):
+        print(f"\n=== INFORMAÇÕES DO FORNECEDOR ===")
+        print(f"ID do Fornecedor: {self.fornecedor_id}")
+        print(f"Nome: {self.nome}")
+        print(f"CNPJ: {self.cnpj}")
+        print(f"Telefone: {self.telefone}")
+        print(f"Email: {self.email}")
+        print(f"Endereço: {self.endereco}")
+
+def validar_cnpj(cnpj):
+    """Valida CNPJ (14 dígitos numéricos)"""
+    numeros = ''.join(c for c in cnpj if c.isdigit())
+    return len(numeros) == 14
+
+def validar_telefone(telefone):
+    """Valida telefone (máximo 11 caracteres)"""
+    if len(telefone) > 11:
+        return False
+    numeros = ''.join(c for c in telefone if c.isdigit())
+    return 8 <= len(numeros) <= 11
+
+def validar_email(email):
+    """Valida email (máximo 100 caracteres)"""
+    if len(email) > 100:
+        return False
+    return '@' in email and '.' in email
+
+if __name__ == "__main__":
+    print("=== CADASTRO DE FORNECEDOR ===")
+    
+    fornecedor_id = int(input("Digite o ID do fornecedor: "))
+    
+    nome = input("Digite o nome do fornecedor (máx 100 caracteres): ")
+    while len(nome) > 100:
+        print("Nome muito longo! Máximo 100 caracteres.")
+        nome = input("Digite o nome do fornecedor: ")
+    
+    cnpj = input("Digite o CNPJ (14 dígitos): ")
+    while not validar_cnpj(cnpj):
+        print("CNPJ inválido! Deve conter 14 dígitos.")
+        cnpj = input("Digite o CNPJ: ")
+    
+    telefone = input("Digite o telefone (máx 15 caracteres): ")
+    while not validar_telefone(telefone):
+        print("Telefone inválido! Use DDD + número (8-11 dígitos)")
+        telefone = input("Digite o telefone: ")
+    
+    email = input("Digite o email (máx 100 caracteres): ")
+    while not validar_email(email) or len(email) > 100:
+        print("Email inválido ou muito longo!")
+        email = input("Digite o email: ")
+    
+    endereco = input("Digite o endereço (máx 200 caracteres): ")
+    while len(endereco) > 200:
+        print("Endereço muito longo! Máximo 200 caracteres.")
+        endereco = input("Digite o endereço: ")
+    
+    fornecedor = Fornecedor(fornecedor_id, nome, cnpj, telefone, email, endereco)
+    
+    fornecedor.exibir_info()
