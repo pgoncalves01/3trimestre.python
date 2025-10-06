@@ -1,0 +1,34 @@
+class Departamento:
+    def __init__(self, departamento_id, hospital_id, nome, descricao, andar):
+        self.departamento_id = departamento_id
+        self.hospital_id = hospital_id
+        self.nome = nome
+        self.descricao = descricao
+        self.andar = andar
+    
+    def exibir_info(self):
+        print(f"\n=== INFORMAÇÕES DO DEPARTAMENTO ===")
+        print(f"ID do Departamento: {self.departamento_id}")
+        print(f"ID do Hospital: {self.hospital_id}")
+        print(f"Nome: {self.nome}")
+        print(f"Descrição: {self.descricao}")
+        print(f"Andar: {self.andar}")
+
+if __name__ == "__main__":
+    print("=== CADASTRO DE DEPARTAMENTO ===")
+    
+    departamento_id = int(input("Digite o ID do departamento: "))
+    hospital_id = int(input("Digite o ID do hospital: "))
+    
+    nome = input("Digite o nome do departamento (máx 100 caracteres): ")
+    while len(nome) > 100:
+        print("Nome muito longo! Máximo 100 caracteres.")
+        nome = input("Digite o nome do departamento: ")
+    
+    descricao = input("Digite a descrição: ")
+    
+    andar = int(input("Digite o andar: "))
+    
+    departamento = Departamento(departamento_id, hospital_id, nome, descricao, andar)
+    
+    departamento.exibir_info()
