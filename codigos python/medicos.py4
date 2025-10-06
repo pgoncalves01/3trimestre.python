@@ -1,0 +1,82 @@
+class Medico:
+    def __init__(self, medico_id, departamento_id, crm, nome, especialidade, telefone, email, data_emissao, salario):
+        self.medico_id = medico_id
+        self.departamento_id = departamento_id
+        self.crm = crm
+        self.nome = nome
+        self.especialidade = especialidade
+        self.telefone = telefone
+        self.email = email
+        self.data_emissao = data_emissao
+        self.salario = salario
+    
+    def exibir_info(self):
+        print(f"\n=== INFORMAÇÕES DO MÉDICO ===")
+        print(f"ID do Médico: {self.medico_id}")
+        print(f"ID do Departamento: {self.departamento_id}")
+        print(f"CRM: {self.crm}")
+        print(f"Nome: {self.nome}")
+        print(f"Especialidade: {self.especialidade}")
+        print(f"Telefone: {self.telefone}")
+        print(f"Email: {self.email}")
+        print(f"Data Emissão CRM: {self.data_emissao}")
+        print(f"Salário: R$ {self.salario:.2f}")
+
+def validar_crm(crm):
+    """Valida CRM (máximo 20 caracteres)"""
+    return len(crm) <= 20 and crm.isalnum()
+
+def validar_telefone(telefone):
+    """Valida telefone (máximo 11 caracteres)"""
+    if len(telefone) > 11:
+        return False
+    numeros = ''.join(c for c in telefone if c.isdigit())
+    return 8 <= len(numeros) <= 11
+
+def validar_email(email):
+    """Valida email (máximo 100 caracteres)"""
+    if len(email) > 100:
+        return False
+    return '@' in email and '.' in email
+
+if __name__ == "__main__":
+    print("=== CADASTRO DE MÉDICO ===")
+    
+    medico_id = int(input("Digite o ID do médico: "))
+    departamento_id = int(input("Digite o ID do departamento: "))
+    
+    crm = input("Digite o CRM (máx 20 caracteres): ")
+    while not validar_crm(crm):
+        print("CRM inválido! Máximo 20 caracteres alfanuméricos.")
+        crm = input("Digite o CRM: ")
+    
+    nome = input("Digite o nome do médico (máx 100 caracteres): ")
+    while len(nome) > 100:
+        print("Nome muito longo! Máximo 100 caracteres.")
+        nome = input("Digite o nome do médico: ")
+    
+    especialidade = input("Digite a especialidade (máx 50 caracteres): ")
+    while len(especialidade) > 50:
+        print("Especialidade muito longa! Máximo 50 caracteres.")
+        especialidade = input("Digite a especialidade: ")
+    
+    telefone = input("Digite o telefone (máx 15 caracteres): ")
+    while not validar_telefone(telefone):
+        print("Telefone inválido! Use DDD + número (8-11 dígitos)")
+        telefone = input("Digite o telefone: ")
+    
+    email = input("Digite o email (máx 100 caracteres): ")
+    while not validar_email(email) or len(email) > 100:
+        print("Email inválido ou muito longo!")
+        email = input("Digite o email: ")
+    
+    data_emissao = input("Digite a data de emissão do CRM (YYYY-MM-DD): ")
+    
+    salario = float(input("Digite o salário: R$ "))
+    while salario < 0:
+        print("Salário não pode ser negativo!")
+        salario = float(input("Digite o salário: R$ "))
+    
+    medico = Medico(medico_id, departamento_id, crm, nome, especialidade, telefone, email, data_emissao, salario)
+    
+    medico.exibir_info()
