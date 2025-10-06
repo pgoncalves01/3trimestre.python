@@ -1,0 +1,54 @@
+class Consulta:
+    def __init__(self, consulta_id, paciente_id, medico_id, data_consulta, diagnostico, prescricao, status, valor_consulta):
+        self.consulta_id = consulta_id
+        self.paciente_id = paciente_id
+        self.medico_id = medico_id
+        self.data_consulta = data_consulta
+        self.diagnostico = diagnostico
+        self.prescricao = prescricao
+        self.status = status
+        self.valor_consulta = valor_consulta
+    
+    def exibir_info(self):
+        print(f"\n=== INFORMAÇÕES DA CONSULTA ===")
+        print(f"ID da Consulta: {self.consulta_id}")
+        print(f"ID do Paciente: {self.paciente_id}")
+        print(f"ID do Médico: {self.medico_id}")
+        print(f"Data da Consulta: {self.data_consulta}")
+        print(f"Diagnóstico: {self.diagnostico}")
+        print(f"Prescrição: {self.prescricao}")
+        print(f"Status: {self.status}")
+        print(f"Valor: R$ {self.valor_consulta:.2f}")
+
+def validar_status_consulta(status):
+    """Valida status da consulta"""
+    status_validos = ['Agendada', 'Realizada', 'Cancelada', 'Remarcada']
+    return status in status_validos
+
+if __name__ == "__main__":
+    print("=== CADASTRO DE CONSULTA ===")
+    
+    consulta_id = int(input("Digite o ID da consulta: "))
+    paciente_id = int(input("Digite o ID do paciente: "))
+    medico_id = int(input("Digite o ID do médico: "))
+    
+    data_consulta = input("Digite a data e hora da consulta (YYYY-MM-DD HH:MM): ")
+    
+    diagnostico = input("Digite o diagnóstico: ")
+    
+    prescricao = input("Digite a prescrição: ")
+    
+    print("Status disponíveis: Agendada, Realizada, Cancelada, Remarcada")
+    status = input("Digite o status: ")
+    while not validar_status_consulta(status):
+        print("Status inválido! Escolha entre: Agendada, Realizada, Cancelada, Remarcada")
+        status = input("Digite o status: ")
+    
+    valor_consulta = float(input("Digite o valor da consulta: R$ "))
+    while valor_consulta < 0:
+        print("Valor não pode ser negativo!")
+        valor_consulta = float(input("Digite o valor da consulta: R$ "))
+    
+    consulta = Consulta(consulta_id, paciente_id, medico_id, data_consulta, diagnostico, prescricao, status, valor_consulta)
+    
+    consulta.exibir_info()
