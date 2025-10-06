@@ -1,0 +1,55 @@
+class Prescricao:
+    def __init__(self, prescricao_id, consulta_id, medicamento_id, dosagem, frequencia, duracao):
+        self.prescricao_id = prescricao_id
+        self.consulta_id = consulta_id
+        self.medicamento_id = medicamento_id
+        self.dosagem = dosagem
+        self.frequencia = frequencia
+        self.duracao = duracao
+    
+    def exibir_info(self):
+        print(f"\n=== INFORMAÇÕES DA PRESCRIÇÃO ===")
+        print(f"ID da Prescrição: {self.prescricao_id}")
+        print(f"ID da Consulta: {self.consulta_id}")
+        print(f"ID do Medicamento: {self.medicamento_id}")
+        print(f"Dosagem: {self.dosagem}")
+        print(f"Frequência: {self.frequencia}")
+        print(f"Duração: {self.duracao}")
+
+def validar_dosagem(dosagem):
+    """Valida dosagem (máximo 50 caracteres)"""
+    return len(dosagem) <= 50
+
+def validar_frequencia(frequencia):
+    """Valida frequência (máximo 50 caracteres)"""
+    return len(frequencia) <= 50
+
+def validar_duracao(duracao):
+    """Valida duração (máximo 50 caracteres)"""
+    return len(duracao) <= 50
+
+if __name__ == "__main__":
+    print("=== CADASTRO DE PRESCRIÇÃO ===")
+    
+    prescricao_id = int(input("Digite o ID da prescrição: "))
+    consulta_id = int(input("Digite o ID da consulta: "))
+    medicamento_id = int(input("Digite o ID do medicamento: "))
+    
+    dosagem = input("Digite a dosagem (máx 50 caracteres): ")
+    while not validar_dosagem(dosagem):
+        print("Dosagem muito longa! Máximo 50 caracteres.")
+        dosagem = input("Digite a dosagem: ")
+    
+    frequencia = input("Digite a frequência (máx 50 caracteres): ")
+    while not validar_frequencia(frequencia):
+        print("Frequência muito longa! Máximo 50 caracteres.")
+        frequencia = input("Digite a frequência: ")
+    
+    duracao = input("Digite a duração (máx 50 caracteres): ")
+    while not validar_duracao(duracao):
+        print("Duração muito longa! Máximo 50 caracteres.")
+        duracao = input("Digite a duração: ")
+    
+    prescricao = Prescricao(prescricao_id, consulta_id, medicamento_id, dosagem, frequencia, duracao)
+    
+    prescricao.exibir_info()
