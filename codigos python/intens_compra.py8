@@ -1,0 +1,40 @@
+class ItemCompra:
+    def __init__(self, item_compra_id, compra_id, medicamento_id, quantidade, preco_unitario):
+        self.item_compra_id = item_compra_id
+        self.compra_id = compra_id
+        self.medicamento_id = medicamento_id
+        self.quantidade = quantidade
+        self.preco_unitario = preco_unitario
+    
+    def calcular_total(self):
+        return self.quantidade * self.preco_unitario
+    
+    def exibir_info(self):
+        print(f"\n=== INFORMAÇÕES DO ITEM DE COMPRA ===")
+        print(f"ID do Item: {self.item_compra_id}")
+        print(f"ID da Compra: {self.compra_id}")
+        print(f"ID do Medicamento: {self.medicamento_id}")
+        print(f"Quantidade: {self.quantidade}")
+        print(f"Preço Unitário: R$ {self.preco_unitario:.2f}")
+        print(f"Total: R$ {self.calcular_total():.2f}")
+
+if __name__ == "__main__":
+    print("=== CADASTRO DE ITEM DE COMPRA ===")
+    
+    item_compra_id = int(input("Digite o ID do item de compra: "))
+    compra_id = int(input("Digite o ID da compra: "))
+    medicamento_id = int(input("Digite o ID do medicamento: "))
+    
+    quantidade = int(input("Digite a quantidade: "))
+    while quantidade <= 0:
+        print("Quantidade deve ser maior que zero!")
+        quantidade = int(input("Digite a quantidade: "))
+    
+    preco_unitario = float(input("Digite o preço unitário: R$ "))
+    while preco_unitario < 0:
+        print("Preço não pode ser negativo!")
+        preco_unitario = float(input("Digite o preço unitário: R$ "))
+    
+    item_compra = ItemCompra(item_compra_id, compra_id, medicamento_id, quantidade, preco_unitario)
+    
+    item_compra.exibir_info()
