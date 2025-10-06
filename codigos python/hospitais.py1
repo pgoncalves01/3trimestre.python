@@ -1,0 +1,64 @@
+class Hospital:
+    def __init__(self, hospital_id, nome, endereco, telefone, email, data_fundacao, capacidade):
+        self.hospital_id = hospital_id
+        self.nome = nome
+        self.endereco = endereco
+        self.telefone = telefone
+        self.email = email
+        self.data_fundacao = data_fundacao
+        self.capacidade = capacidade
+    
+    def exibir_info(self):
+        print(f"\n=== INFORMAÇÕES DO HOSPITAL ===")
+        print(f"ID: {self.hospital_id}")
+        print(f"Nome: {self.nome}")
+        print(f"Endereço: {self.endereco}")
+        print(f"Telefone: {self.telefone}")
+        print(f"Email: {self.email}")
+        print(f"Data Fundação: {self.data_fundacao}")
+        print(f"Capacidade: {self.capacidade} leitos")
+
+def validar_telefone(telefone):
+    """Valida telefone (máximo 15 caracteres, apenas números e hífen)"""
+    if len(telefone) > 15:
+        return False
+    numeros = ''.join(c for c in telefone if c.isdigit())
+    return 8 <= len(numeros) <= 11
+
+def validar_email(email):
+    """Valida email básico (máximo 100 caracteres)"""
+    if len(email) > 100:
+        return False
+    return '@' in email and '.' in email
+
+if __name__ == "__main__":
+    print("=== CADASTRO DE HOSPITAL ===")
+    
+    hospital_id = int(input("Digite o ID do hospital: "))
+    
+    nome = input("Digite o nome do hospital (máx 100 caracteres): ")
+    while len(nome) > 100:
+        print("Nome muito longo! Máximo 100 caracteres.")
+        nome = input("Digite o nome do hospital: ")
+    
+    endereco = input("Digite o endereço (máx 200 caracteres): ")
+    while len(endereco) > 200:
+        print("Endereço muito longo! Máximo 200 caracteres.")
+        endereco = input("Digite o endereço: ")
+    
+    telefone = input("Digite o telefone (máx 11 caracteres): ")
+    while not validar_telefone(telefone):
+        print("Telefone inválido! Use DDD + número (8-11 dígitos)")
+        telefone = input("Digite o telefone: ")
+    
+    email = input("Digite o email (máx 100 caracteres): ")
+    while not validar_email(email) or len(email) > 100:
+        print("Email inválido ou muito longo!")
+        email = input("Digite o email: ")
+    
+    data_fundacao = input("Digite a data de fundação (YYYY-MM-DD): ")
+    capacidade = int(input("Digite a capacidade: "))
+    
+    hospital = Hospital(hospital_id, nome, endereco, telefone, email, data_fundacao, capacidade)
+    
+    hospital.exibir_info()
